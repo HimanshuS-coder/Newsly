@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 // NewsListAdapter takes DATA in its constructor
 // Here For example i am taking a list of strings just to understand how recycler view works
-class NewsListAdapter(private val items : ArrayList<String>): RecyclerView.Adapter<NewsItemViewHolder>() {
+class NewsListAdapter(private val items : ArrayList<String> , private val listener : NewsItemClicked): RecyclerView.Adapter<NewsItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsItemViewHolder {
         // This function will be called everytime a view of data is created
@@ -16,7 +16,13 @@ class NewsListAdapter(private val items : ArrayList<String>): RecyclerView.Adapt
         // and to do so we need LAYOUT INFLATER CLASS
         // LAYOUT INFLATED CLASS IS USED TO CONVERT AN XML DOCUMENT TO VIEW
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_news,parent,false)
-        return NewsItemViewHolder(view)
+        val viewHolder = NewsItemViewHolder(view)
+
+        view.setOnClickListener{
+            listener.onItemClicked(items[viewHolder.adapterPosition])
+        }
+
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: NewsItemViewHolder, position: Int) {
@@ -34,4 +40,8 @@ class NewsListAdapter(private val items : ArrayList<String>): RecyclerView.Adapt
 
 class NewsItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val titleView : TextView = itemView.findViewById(R.id.title)
+}
+
+interface NewsItemClicked{
+    fun onItemClicked(item : String)
 }
