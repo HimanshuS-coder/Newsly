@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class NewsListAdapter: RecyclerView.Adapter<NewsItemViewHolder>() {
+class NewsListAdapter(val items : ArrayList<String>): RecyclerView.Adapter<NewsItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsItemViewHolder {
         TODO("Not yet implemented")
     }
@@ -22,5 +22,4 @@ class NewsListAdapter: RecyclerView.Adapter<NewsItemViewHolder>() {
 
 class NewsItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val TitleView : TextView = itemView.findViewById(R.id.title)
-
 }
